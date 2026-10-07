@@ -1,7 +1,7 @@
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 const allowed=new Set(['first-steps','coffee-break','kennedy-moon']);
 const lessons=JSON.parse((await readFile('content/lessons.json','utf8')).replace(/^\uFEFF/,''));
-const rows=lessons.filter(c=>allowed.has(c.id));
+const rows=lessons.filter(c=>allowed.has(c.id)).map(c=>({...c,kind:c.kind||(c.media?.endsWith('.mp4')?'video':'audio')}));
 const quote=s=>"'"+s.replaceAll("'","''")+"'";
 await mkdir('data/supabase',{recursive:true});
 const sql=rows.map(c=>`insert into echo_private.courses(id,draft,published,status) values(${quote(c.id)},${quote(JSON.stringify(c))}::jsonb,${quote(JSON.stringify(c))}::jsonb,'published') on conflict(id) do nothing;`).join('\n');

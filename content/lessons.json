@@ -189,7 +189,8 @@
     "premium": false,
     "title": "从一句开始，找到自己的节奏",
     "media": "/media/first-steps.wav",
-    "wordDetails": {}
+    "wordDetails": {},
+    "kind": "audio"
   },
   {
     "id": "coffee-break",
@@ -238,6 +239,7 @@
     "premium": true,
     "title": "一杯咖啡的时间，聊聊生活",
     "media": "/media/coffee-break.wav",
-    "wordDetails": {}
+    "wordDetails": {},
+    "kind": "audio"
   }
 ]
