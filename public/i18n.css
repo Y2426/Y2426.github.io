@@ -1,0 +1,25 @@
+.language-control{display:inline-flex;align-items:center;gap:6px;flex-shrink:0;min-height:40px;padding:0 9px;border:1px solid #d6ddd8;border-radius:10px;background:#fff;color:#263a33;font-size:13px;line-height:1.2}
+.language-control svg{width:18px;height:18px;flex:none}
+.language-control select{font:inherit;color:inherit;background:transparent;border:0;min-height:38px;width:auto;padding:0 20px 0 2px;cursor:pointer;margin:0}
+.language-control:focus-within{outline:2px solid #48765f;outline-offset:3px}
+.language-control select:focus{outline:none}
+.language-control option{background:#fff;color:#263a33}
+.studio-mode .player-title-row{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.studio-mode .player-title-row>div{min-width:0}
+.studio-mode .player-language{background:var(--theme-surface,#11364a);color:var(--theme-ink,#eef1f5);border-color:var(--line,#456)}
+html[lang="en"] body.studio-mode #transcript-list .cue.active::before{content:'CURRENT'}
+section.auth>.language-control{float:right;margin:0 0 14px 12px}
+html[lang="en"] .heading-row h1{font-size:clamp(28px,3.6vw,46px);max-width:760px;letter-spacing:-.035em;line-height:1.16}
+html[lang="en"] .hero h2{font-size:clamp(27px,3.3vw,44px);line-height:1.14}
+html[lang="en"] .hero-copy{max-width:620px}
+html[lang="en"] .mode-tabs{flex-wrap:wrap}
+html[lang="en"] .mode-tabs .mode{white-space:normal;line-height:1.25;min-height:40px;padding:9px 12px}
+html[lang="en"] .reference-controls small{white-space:normal;max-width:85px;line-height:1.15;font-size:11px}
+html[lang="en"] .reference-controls button{min-width:40px}
+html[lang="en"] .dock-filters,html[lang="en"] .word-dock-extras{flex-wrap:wrap}
+html[lang="en"] .nav-item{font-size:14px;white-space:normal}
+html[lang="en"] .private-badge{font-size:11px}
+html[lang="en"] .top-actions{gap:9px}
+html[lang="en"] button{overflow-wrap:normal}
+@media(max-width:800px){.topbar{flex-wrap:wrap;gap:10px;height:auto;min-height:68px;padding-top:10px;padding-bottom:10px}.top-actions{flex-wrap:wrap}.top-actions .private-badge{display:none}html[lang="en"] .mode-tabs .mode{font-size:12px;padding:8px}.language-control{min-height:38px}.language-control select{min-height:36px}}
+@media print{.language-control{display:none!important}}

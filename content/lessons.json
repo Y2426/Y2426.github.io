@@ -1,0 +1,243 @@
+[
+  {
+    "id": "kennedy-moon",
+    "title": "肯尼迪：我们选择登月",
+    "description": "人物现场演讲 · 练习重音、停顿与 not because… but because… 的表达。1962 年历史档案画质。",
+    "topic": "经典演讲",
+    "level": "B1 进阶",
+    "premium": false,
+    "kind": "video",
+    "media": "/media/kennedy-moon.mp4",
+    "poster": "/kennedy-moon.jpg",
+    "duration": 26.8,
+    "cues": [
+      {
+        "start": 0.12,
+        "end": 4.72,
+        "text": "We choose to go to the Moon in this decade and do the other things,",
+        "translation": "我们选择在这个十年登上月球，并完成其他事业，"
+      },
+      {
+        "start": 4.96,
+        "end": 6.75,
+        "text": "not because they are easy,",
+        "translation": "不是因为这些事容易，"
+      },
+      {
+        "start": 6.95,
+        "end": 8.4,
+        "text": "but because they are hard.",
+        "translation": "而是因为它们艰难。"
+      },
+      {
+        "start": 9.02,
+        "end": 13.18,
+        "text": "Because that goal will serve to organize and measure",
+        "translation": "因为这个目标将有助于凝聚和检验"
+      },
+      {
+        "start": 13.18,
+        "end": 15.98,
+        "text": "the best of our energies and skills.",
+        "translation": "我们最出色的精力与技能。"
+      },
+      {
+        "start": 16.34,
+        "end": 20,
+        "text": "Because that challenge is one that we're willing to accept,",
+        "translation": "因为这个挑战，我们愿意接受，"
+      },
+      {
+        "start": 20.44,
+        "end": 22.84,
+        "text": "one we are unwilling to postpone,",
+        "translation": "我们不愿推迟，"
+      },
+      {
+        "start": 23.3,
+        "end": 26.2,
+        "text": "and one we intend to win, and the others, too.",
+        "translation": "我们决心赢得胜利，其他挑战也同样如此。"
+      }
+    ],
+    "source": {
+      "name": "NASA Video / Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:President_Kennedy%27s_Speech_at_Rice_University.ogv",
+      "note": "NASA 现场影像节选，本站整理中英学习字幕，不表示来源机构背书。"
+    },
+    "vocabulary": {
+      "choose": [
+        "/tʃuːz/",
+        "选择"
+      ],
+      "decade": [
+        "/ˈdekeɪd/",
+        "十年"
+      ],
+      "goal": [
+        "/ɡoʊl/",
+        "目标"
+      ],
+      "serve": [
+        "/sɜːrv/",
+        "起作用；serve to 有助于"
+      ],
+      "organize": [
+        "/ˈɔːrɡənaɪz/",
+        "组织；凝聚"
+      ],
+      "measure": [
+        "/ˈmeʒər/",
+        "衡量；检验"
+      ],
+      "energies": [
+        "/ˈenərdʒiz/",
+        "精力；力量"
+      ],
+      "skills": [
+        "/skɪlz/",
+        "技能"
+      ],
+      "challenge": [
+        "/ˈtʃælɪndʒ/",
+        "挑战"
+      ],
+      "willing": [
+        "/ˈwɪlɪŋ/",
+        "愿意的；be willing to 愿意做"
+      ],
+      "accept": [
+        "/əkˈsept/",
+        "接受"
+      ],
+      "unwilling": [
+        "/ʌnˈwɪlɪŋ/",
+        "不愿意的"
+      ],
+      "postpone": [
+        "/poʊˈspoʊn/",
+        "推迟"
+      ],
+      "intend": [
+        "/ɪnˈtend/",
+        "打算；决心"
+      ]
+    },
+    "wordDetails": {
+      "decade": {
+        "pos": "noun",
+        "definition": "a period of ten years"
+      }
+    }
+  },
+  {
+    "id": "first-steps",
+    "description": "一段写给英语学习者的原创小练习。听清楚，再慢慢跟上。",
+    "level": "A1 入门",
+    "topic": "日常表达",
+    "cues": [
+      {
+        "translation": "每个早晨，都是重新开始的机会。",
+        "end": 3.2639455782312927,
+        "text": "Every morning is a chance to start again.",
+        "start": 0
+      },
+      {
+        "translation": "你不需要做到完美。",
+        "end": 6.4629478458049885,
+        "text": "You do not have to be perfect.",
+        "start": 3.7639455782312927
+      },
+      {
+        "translation": "深呼吸，认真地听。",
+        "end": 9.991972789115646,
+        "text": "Take a deep breath and listen carefully.",
+        "start": 6.9629478458049885
+      },
+      {
+        "translation": "试着一次练习一个句子。",
+        "end": 13.116099773242631,
+        "text": "Try one sentence at a time.",
+        "start": 10.491972789115646
+      },
+      {
+        "translation": "小小的进步，也能带来很大的改变。",
+        "end": 16.945079365079366,
+        "text": "Small steps can make a big difference.",
+        "start": 13.616099773242631
+      },
+      {
+        "translation": "你的声音会随着练习更加坚定。",
+        "end": 20.614104308390022,
+        "text": "Your voice gets stronger with practice.",
+        "start": 17.445079365079366
+      },
+      {
+        "translation": "按照自己的节奏，继续前进。",
+        "end": 23.753333333333334,
+        "text": "Keep going at your own pace.",
+        "start": 21.114104308390022
+      },
+      {
+        "translation": "明天的你，会庆幸今天已经开始。",
+        "end": 28.052380952380954,
+        "text": "Tomorrow, you will be glad you started today.",
+        "start": 24.253333333333334
+      }
+    ],
+    "duration": 28.552380952380954,
+    "premium": false,
+    "title": "从一句开始，找到自己的节奏",
+    "media": "/media/first-steps.wav",
+    "wordDetails": {}
+  },
+  {
+    "id": "coffee-break",
+    "description": "原创会员示范：放慢脚步，练习一次自然的日常对话。",
+    "level": "A2 基础",
+    "topic": "生活口语",
+    "cues": [
+      {
+        "translation": "你想休息一小会儿吗？",
+        "end": 2.864126984126984,
+        "text": "Would you like to take a short break?",
+        "start": 0
+      },
+      {
+        "translation": "拐角处有一家安静的咖啡馆。",
+        "end": 6.588027210884354,
+        "text": "There is a quiet cafe around the corner.",
+        "start": 3.364126984126984
+      },
+      {
+        "translation": "我通常点一杯加少许牛奶的咖啡。",
+        "end": 10.517097505668934,
+        "text": "I usually order a coffee with a little milk.",
+        "start": 7.088027210884354
+      },
+      {
+        "translation": "你周末喜欢做什么？",
+        "end": 14.161179138321996,
+        "text": "What do you enjoy doing on weekends?",
+        "start": 11.017097505668934
+      },
+      {
+        "translation": "我最近一直在尝试多花些时间到户外。",
+        "end": 18.235192743764173,
+        "text": "I have been trying to spend more time outside.",
+        "start": 14.661179138321996
+      },
+      {
+        "translation": "一次简单的交谈，就能让你的一天明亮起来。",
+        "end": 22.12421768707483,
+        "text": "A simple conversation can brighten your day.",
+        "start": 18.735192743764173
+      }
+    ],
+    "duration": 22.62421768707483,
+    "premium": true,
+    "title": "一杯咖啡的时间，聊聊生活",
+    "media": "/media/coffee-break.wav",
+    "wordDetails": {}
+  }
+]
