@@ -7,7 +7,7 @@
     "start": "node server.mjs",
     "test": "node --test tests/*.test.mjs",
     "build:static": "node scripts/build-static.mjs",
-    "test:cloud": "node --test tests/supabase.test.mjs tests/answer-validation.test.mjs tests/i18n.test.mjs tests/vocabulary.test.mjs tests/word-card.test.mjs"
+    "test:cloud": "node --test tests/supabase.test.mjs tests/static-build.test.mjs tests/answer-validation.test.mjs tests/i18n.test.mjs tests/vocabulary.test.mjs tests/word-card.test.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.117.2",

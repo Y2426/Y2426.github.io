@@ -7,6 +7,7 @@ permissions:
   contents: read
 jobs:
   build:
+    if: vars.SUPABASE_URL != '' && vars.SUPABASE_PUBLISHABLE_KEY != ''
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
