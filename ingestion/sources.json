@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "maxPerRun": 20,
+  "scanLimit": 40,
+  "minDuration": 20,
+  "maxDuration": 900,
+  "maxCueSeconds": 12,
+  "maxCueWords": 28,
+  "premium": false,
+  "sources": [
+    {"url":"https://www.youtube.com/@michellechoii/videos","topic":"日常 Vlog","maxPerRun":5},
+    {"url":"https://www.youtube.com/@nathanieldrew/videos","topic":"生活与旅行 Vlog","maxPerRun":5},
+    {"url":"https://www.youtube.com/@TED/videos","topic":"演讲与成长","maxPerRun":6},
+    {"url":"https://www.youtube.com/@Vogue/videos","topic":"名人访谈","maxPerRun":4,"titleIncludes":["73 questions","interview"]}
+  ]
+}

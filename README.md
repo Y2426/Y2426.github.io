@@ -13,3 +13,7 @@ Payments and AI are disabled in this edition. Users sign in with a username and 
 - Read [deployment instructions](deploy/Supabase免费部署.md) for account setup, media import and verification.
 
 Media files are not included. Original demo and public-domain course metadata is included; third-party reference materials are excluded. Public source visibility does not grant rights to third-party materials.
+
+## YouTube course ingestion
+
+Weekly YouTube ingestion prepares bilingual course drafts in Supabase; publication remains manual. See [setup and source configuration](ingestion/README.md). Automation is disabled until credentials and the first real import have been verified.
