@@ -1,0 +1,58 @@
+name: YouTube to course drafts
+on:
+  workflow_dispatch:
+    inputs:
+      max_per_run:
+        description: '本次处理上限（首次建议 1，最多 20）'
+        default: '1'
+        type: string
+  schedule:
+    # Mondays at 09:00 Asia/Shanghai. GitHub may delay scheduled jobs.
+    - cron: '0 1 * * 1'
+permissions:
+  contents: read
+concurrency:
+  group: youtube-course-ingestion
+  cancel-in-progress: false
+jobs:
+  ingest:
+    if: vars.YOUTUBE_INGEST_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: ingestion/requirements.txt
+      - run: npm ci
+      - run: pip install -r ingestion/requirements.txt
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - run: node --test tests/ingestion.test.mjs
+      - name: Import drafts
+        run: node ingestion/worker.mjs
+        env:
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ vars.SUPABASE_PUBLISHABLE_KEY }}
+          INGEST_ADMIN_USERNAME: ${{ secrets.INGEST_ADMIN_USERNAME }}
+          INGEST_ADMIN_PASSWORD: ${{ secrets.INGEST_ADMIN_PASSWORD }}
+          AI_API_URL: ${{ vars.AI_API_URL || 'https://api.deepseek.com/chat/completions' }}
+          AI_API_KEY: ${{ secrets.AI_API_KEY }}
+          AI_MODEL: ${{ vars.AI_MODEL || 'deepseek-flash' }}
+          INGEST_MAX_PER_RUN: ${{ inputs.max_per_run || '20' }}
+      - name: Keep processing report and subtitles
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-ingestion-${{ github.run_id }}
+          path: |
+            data/youtube-ingest/last-run.json
+            data/youtube-ingest/**/course.json
+            data/youtube-ingest/**/lesson.srt
+          retention-days: 7
+          if-no-files-found: ignore
