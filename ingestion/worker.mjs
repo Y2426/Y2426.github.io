@@ -1,4 +1,4 @@
-import {readFile,writeFile,mkdir,open,unlink} from 'node:fs/promises';
+import {readFile,writeFile,mkdir,open,unlink,rename} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {spawn} from 'node:child_process';
@@ -12,7 +12,7 @@ const defaultState=process.platform==='win32'&&process.env.LOCALAPPDATA?path.joi
 const state=path.resolve(process.env.INGEST_STATE_DIR||defaultState);
 const configFile=path.resolve(process.env.INGEST_CONFIG||path.join(root,'sources.json'));
 async function json(file){return JSON.parse((await readFile(file,'utf8')).replace(/^\uFEFF/,''));}
-async function save(file,value){await writeFile(file,JSON.stringify(value,null,2));}
+async function save(file,value){const pending=file+'.pending';await writeFile(pending,JSON.stringify(value,null,2));await rename(pending,file);}
 function required(key){const v=process.env[key];if(!v)throw Error(`尚未配置 ${key}`);return v;}
 function python(args){return new Promise((resolve,reject)=>{
  const proc=spawn(process.env.INGEST_PYTHON||'python',[path.join(root,'media.py'),...args],{shell:false,windowsHide:true,env:{...process.env,PYTHONUTF8:'1',PYTHONIOENCODING:'utf-8'},stdio:['ignore','ignore','pipe']});
@@ -93,12 +93,13 @@ async function main(){
       const words=normalizeWords(transcript.words,transcript.metadata.duration);
       const speechRatio=words.reduce((sum,w)=>sum+w.end-w.start,0)/transcript.metadata.duration;
       if(speechRatio<.35)throw Error('有效口语占比不足 35%，不适合连续跟读');
+      const uncertain=words.filter(w=>w.probability<.5).length;
+      if(uncertain/words.length>.15)throw Error('低置信度词超过 15%，请更换识别模型后重试');
       const cues=[],results=[];
       for(const batch of wordBatches(words)){const enriched=await enrich(batch,config);cues.push(...enriched.cues);results.push(enriched.result);}
       course=makeCourse(transcript.metadata,cues,results,{...config,topic:source.topic});
-      const uncertain=words.filter(w=>w.probability<.5).length;
       course.ingestion.lowConfidenceWords=uncertain;
-      if(uncertain/words.length>.15)throw Error('低置信度词超过 15%，请更换识别模型后重试');
+      course.ingestion.mergedWordUnits=words.filter(w=>w.merged).length;
       await save(courseFile,course);await writeFile(path.join(dir,'lesson.srt'),toSrt(course.cues));
      }
      // Refresh the administrator session after a potentially lengthy ASR run.

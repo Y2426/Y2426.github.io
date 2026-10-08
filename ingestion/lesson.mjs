@@ -25,8 +25,18 @@ export function validateConfig(c){
 }
 export function normalizeWords(words,duration){
  if(!Array.isArray(words)||!words.length||!Number.isFinite(duration)||duration<=0)throw Error('缺少有效的逐词时间轴');
+ // Whisper can place a short word at exactly the next word's onset. Keep both
+ // texts in one timed unit instead of dropping the word or inventing its duration.
+ const units=[];
+ for(let i=0;i<words.length;i++){
+  let w={...words[i]};
+  while(Number.isFinite(w.start)&&w.end===w.start&&i+1<words.length&&Math.abs(words[i+1].start-w.start)<.001){
+   const next=words[++i];w={...next,start:w.start,text:w.text+' '+next.text,probability:Math.min(w.probability??1,next.probability??1),merged:true};
+  }
+  units.push(w);
+ }
  let end=0;
- return words.map((w,i)=>{
+ return units.map((w,i)=>{
   if(typeof w.text!=='string'||!w.text.trim()||!Number.isFinite(w.start)||!Number.isFinite(w.end)||w.start<0||w.end<=w.start||w.end>duration+.05||w.start<end-.08)throw Error(`第 ${i+1} 个词时间轴异常，需要重新识别`);
   const start=Math.max(end,w.start);if(w.end<=start)throw Error('词时间戳重叠');end=w.end;
   return {...w,text:w.text.trim(),start,end};
@@ -49,7 +59,7 @@ export function assembleBatch(words,result,config){
   if(!Number.isInteger(g.first)||!Number.isInteger(g.last)||g.first!==next||g.last<g.first||g.last>=words.length)throw Error('断句遗漏、重复或更改了词序');
   const part=words.slice(g.first,g.last+1);next=g.last+1;
   const start=part[0].start,end=part.at(-1).end;
-  if(part.length>config.maxCueWords||end-start>config.maxCueSeconds+.01)throw Error('句子过长，不适合单句跟读');
+  if(part.reduce((n,w)=>n+w.text.split(/\s+/).length,0)>config.maxCueWords||end-start>config.maxCueSeconds+.01)throw Error('句子过长，不适合单句跟读');
   if(typeof g.translation!=='string'||!/[\u3400-\u9fff]/.test(g.translation)||g.translation.length>600)throw Error('缺少有效中文译文');
   // The model chooses boundaries and translates; timestamps and English stay anchored to ASR.
   return {start,end,text:part.map(w=>w.text).join(' ').replace(/\s+([,.;:!?])/g,'$1'),translation:g.translation.trim()};

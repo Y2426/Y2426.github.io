@@ -17,6 +17,8 @@ test('only HTTPS channel and playlist sources, bounded configuration',()=>{
 test('word alignment normalizes small jitter and rejects invalid timing',()=>{
  assert.deepEqual(normalizeWords(words,2),words);
  assert.equal(normalizeWords([{start:0,end:1,text:'one'},{start:.98,end:2,text:'two'}],2)[1].start,1);
+ const merged=normalizeWords([{start:0,end:0,text:'gonna'},{start:0,end:.3,text:'use'}],1);
+ assert.equal(merged[0].text,'gonna use');assert.equal(merged[0].end,.3);assert.equal(merged.length,1);
  for(const bad of [[{start:0,end:0,text:'x'}],[{start:0,end:3,text:'x'}],[{start:0,end:1,text:'x'},{start:.5,end:2,text:'y'}]])assert.throws(()=>normalizeWords(bad,2));
 });
 test('semantic grouping preserves every original word and rejects unsafe model output',()=>{
