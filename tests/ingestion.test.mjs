@@ -37,6 +37,8 @@ test('batching covers long transcripts exactly once',()=>{
  const long=Array.from({length:251},(_,i)=>({text:i%9===0?'word.':'word',start:i,end:i+.5}));
  assert.deepEqual(wordBatches(long).flat(),long);
  assert.ok(wordBatches(long).every(b=>b.length<=100));
+ const gaps=[{text:'one',start:0,end:1},{text:'two',start:10,end:11}];
+ assert.equal(wordBatches(gaps).length,2);
 });
 function fakeCloud(){
  const rows=[],objects=new Map(),calls=[];let failOnce=false;

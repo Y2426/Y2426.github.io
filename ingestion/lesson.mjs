@@ -47,6 +47,7 @@ export function wordBatches(words){
  const batches=[];
  for(let start=0;start<words.length;){
   let end=Math.min(start+100,words.length);
+  for(let i=start+1;i<end;i++){if(words[i].start-words[i-1].end>1.2){end=i;break;}}
   if(end<words.length){for(let i=end-1;i>start+65;i--){if(/[.!?]["']?$/.test(words[i].text)||words[i+1].start-words[i].end>.4){end=i+1;break;}}}
   batches.push(words.slice(start,end));start=end;
  }
@@ -59,7 +60,7 @@ export function assembleBatch(words,result,config){
   if(!Number.isInteger(g.first)||!Number.isInteger(g.last)||g.first!==next||g.last<g.first||g.last>=words.length)throw Error('断句遗漏、重复或更改了词序');
   const part=words.slice(g.first,g.last+1);next=g.last+1;
   const start=part[0].start,end=part.at(-1).end;
-  if(part.reduce((n,w)=>n+w.text.split(/\s+/).length,0)>config.maxCueWords||end-start>config.maxCueSeconds+.01)throw Error('句子过长，不适合单句跟读');
+  if(part.reduce((n,w)=>n+w.text.split(/\s+/).length,0)>config.maxCueWords||end-start>config.maxCueSeconds+.01)throw Error(`词索引 ${g.first}–${g.last} 的分组过长（${(end-start).toFixed(2)} 秒）；请在此范围内继续分句`);
   if(typeof g.translation!=='string'||!/[\u3400-\u9fff]/.test(g.translation)||g.translation.length>600)throw Error('缺少有效中文译文');
   // The model chooses boundaries and translates; timestamps and English stay anchored to ASR.
   return {start,end,text:part.map(w=>w.text).join(' ').replace(/\s+([,.;:!?])/g,'$1'),translation:g.translation.trim()};
