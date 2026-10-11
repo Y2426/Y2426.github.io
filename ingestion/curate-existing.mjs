@@ -16,8 +16,11 @@ try{
  const dir=path.resolve('data/curation-backups');await mkdir(dir,{recursive:true});
  await writeFile(path.join(dir,id+'-v'+row.revision+'.json'),JSON.stringify(row,null,2),{flag:'wx'}).catch(e=>{if(e.code!=='EEXIST')throw e;});
  const course=await curateCourse(row.course);
+ if(process.argv.includes('--vocabulary-only'))for(const key of ['title','description','topic','level','difficulty'])course[key]=row.course[key];
  if(course.media!==row.course.media||JSON.stringify(course.cues)!==JSON.stringify(row.course.cues))throw Error('编辑不得改变视频或字幕时间轴');
  const saved=await rpc('admin/courses/'+id,'PUT',{course,revision:row.revision});
+ const verified=await rpc('admin/courses/'+id);
+ if(JSON.stringify(verified.course)!==JSON.stringify(saved.course))throw Error('保存后复读校验失败');
  await writeFile(path.join(dir,id+'-updated.json'),JSON.stringify(saved,null,2));
- console.log(JSON.stringify({title:course.title,level:course.level,description:course.description,difficulty:course.difficulty.reason,vocabulary:Object.keys(course.vocabulary),status:saved.status,revision:saved.revision},null,2));
+ console.log(JSON.stringify({title:course.title,level:course.level,description:course.description,difficulty:course.difficulty.reason,vocabulary:Object.keys(course.vocabulary),extensionVocabulary:Object.keys(course.extensionVocabulary),coverage:course.vocabularyCoverage,status:saved.status,revision:saved.revision},null,2));
 }finally{await sb.auth.signOut({scope:'local'});}
