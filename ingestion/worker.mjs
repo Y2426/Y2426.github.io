@@ -115,7 +115,7 @@ async function main(){
       course.ingestion.mergedWordUnits=words.filter(w=>w.merged).length;
       await save(courseFile,course);await writeFile(path.join(dir,'lesson.srt'),toSrt(course.cues));
      }
-     if(course.ingestion?.curationVersion!==2){
+     if(course.ingestion?.curationVersion!==3){
       course=await curateCourse(course);await save(courseFile,course);
       console.log(`课程编辑完成：${course.title} · ${course.level} · ${Object.keys(course.vocabulary).length} 个重点词语`);
      }
