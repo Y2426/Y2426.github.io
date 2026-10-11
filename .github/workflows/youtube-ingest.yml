@@ -33,7 +33,7 @@ jobs:
       - run: npm ci
       - run: pip install -r ingestion/requirements.txt
       - run: sudo apt-get update && sudo apt-get install -y ffmpeg
-      - run: node --test tests/ingestion.test.mjs
+      - run: node --test tests/ingestion.test.mjs tests/curation.test.mjs tests/vocabulary.test.mjs
       - name: Import drafts
         run: node ingestion/worker.mjs
         env:
